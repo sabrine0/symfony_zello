@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Products{% endblock %}
+
+{% block body %}
+    <h1>Products</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ product.prix }}</td>
+            </tr>
+            <tr>
+                <th>Ex_Date</th>
+                <td>{{ product.ExDate ? product.ExDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ product.Description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_products_index') }}">back to list</a>
+
+    <a href="{{ path('app_products_edit', {'id': product.id}) }}">edit</a>
+
+    {{ include('products/_delete_form.html.twig') }}
+{% endblock %}

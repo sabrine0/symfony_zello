@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Custom styles for table borders */
+        .table {
+            border-collapse: collapse;
+            border: 5px solid black;
+            padding: 8px;
+            margin-left: auto;
+            margin-right: auto;
+      }
+      .tr th ,td{
+            border: 5px solid black;
+            padding: 8px;
+        }
+        .action{
+         
+        }
+        .h1{
+            text-align:center;
+        }
+        .insert{
+            margin: auto;
+            width: 50%;
+        }
+        a img{
+           width:40px;
+           |length:10px;
+        }
+        
+    </style>
+{% endblock %}
+
+{% block title %}Employes index{% endblock %}
+
+{% block body %}
+    <h1 class="h1">Employes index</h1>
+  <a class="insert" href="{{ path('app_employes_new') }}"><img src={{ asset('images/insert.png') }} alt="insert"></a>
+    <table class="table">
+        <thead>
+            <tr >
+                <th>Id</th>
+                <th>Name</th>
+                <th>LastName</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>BDate</th>
+                <th>service</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employe in employes %}
+            <tr>
+                <td>{{ employe.id }}</td>
+                <td>{{ employe.name }}</td>
+                <td>{{ employe.lastName }}</td>
+                <td>{{ employe.gender }}</td>
+                <td>{{ employe.address }}</td>
+                <td>{{ employe.bDate ? employe.bDate|date('Y-m-d') : '' }}</td>
+                <td> {{ employe.service.designation}}</td>
+                <td >
+                    
+                    <a   href="{{ path('app_employes_show', {'id': employe.id}) }}"><img src="{{ asset('images/eye.png') }}" alt="show"></a>
+                    <a  class="action" href="{{ path('app_employes_edit', {'id': employe.id}) }}"><img src="{{ asset('images/update.png') }}" alt="edit"></a>
+                    <a  href="{{ path('app_employes_delete', {'id': employe.id}) }}"><img src="{{ asset('images/delete.png') }}" alt="delete"></a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+ 
+  
+
+{% endblock %}
